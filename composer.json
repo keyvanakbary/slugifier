@@ -1,0 +1,25 @@
+{
+    "name": "keyvanakbary/slugifier",
+    "description": "Just a simple implementation for creating slugs",
+    "keywords": ["slugifier", "slug", "slugify", "url"],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Keyvan Akbary",
+            "email": "kiwwito@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": { "": "src/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
