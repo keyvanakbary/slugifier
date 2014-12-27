@@ -2,14 +2,14 @@
 
 [![Build Status](https://secure.travis-ci.org/keyvanakbary/slugifier.svg?branch=master)](http://travis-ci.org/keyvanakbary/slugifier)
 
-Just a simple and clean implementation for creating [slugs](http://en.wikipedia.org/wiki/Semantic_URL#Slug)
+Just a simple and clean implementation for creating [slugs](http://en.wikipedia.org/wiki/Semantic_URL#Slug).
 
 ## Setup and Configuration
 Add the following to your `composer.json` file
 ```json
 {
     "require": {
-        "keyvanakbary/slugifier": "*"
+        "keyvanakbary/slugifier": "~1.0"
     }
 }
 ```
