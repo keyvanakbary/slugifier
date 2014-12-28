@@ -20,6 +20,16 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedSlug, $slug);
     }
 
+    /**
+     * @test
+     */
+    public function shouldCreateSlugWithCustomSeparator()
+    {
+        $slug = $this->slugifier->slugify('Wikipedia style', '_');
+
+        $this->assertEquals('wikipedia_style', $slug);
+    }
+
     public function texts()
     {
         return array(
