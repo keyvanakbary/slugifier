@@ -20,6 +20,19 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedSlug, $slug);
     }
 
+    /**
+     * @test
+     * @dataProvider texts
+     */
+    public function shouldCreateSlugWithOtherSeparator($text, $expectedSlug)
+    {
+        $separator = '_';
+
+        $slug = $this->slugifier->slugify($text, $separator);
+
+        $this->assertEquals(str_replace('-', $separator, $expectedSlug), $slug);
+    }
+
     public function texts()
     {
         return array(
