@@ -22,15 +22,12 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @dataProvider texts
      */
-    public function shouldCreateSlugWithOtherSeparator($text, $expectedSlug)
+    public function shouldCreateSlugWithOtherSeparator()
     {
-        $separator = '_';
+        $slug = $this->slugifier->slugify('Wikipedia style', '_');
 
-        $slug = $this->slugifier->slugify($text, $separator);
-
-        $this->assertEquals(str_replace('-', $separator, $expectedSlug), $slug);
+        $this->assertEquals('wikipedia_style', $slug);
     }
 
     public function texts()
