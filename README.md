@@ -15,8 +15,6 @@ composer require keyvanakbary/slugifier
 ## Usage
 
 ```php
-<?php
-
 echo \Slugifier::slugify('JúST å fëw wørds'); // just-a-few-words
 
 echo \Slugifier::slugify('Αυτή είναι μια δοκιμή'); // ayte-einai-mia-dokime
