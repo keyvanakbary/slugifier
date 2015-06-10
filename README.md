@@ -17,11 +17,9 @@ composer require keyvanakbary/slugifier
 ```php
 <?php
 
-$slugifier = new \Slugifier();
+echo \Slugifier::slugify('JúST å fëw wørds'); // just-a-few-words
 
-echo $slugifier->slugify('JúST å fëw wørds'); // just-a-few-words
+echo \Slugifier::slugify('Αυτή είναι μια δοκιμή'); // ayte-einai-mia-dokime
 
-echo $slugifier->slugify('Αυτή είναι μια δοκιμή'); // ayte-einai-mia-dokime
-
-echo $slugifier->slugify('Wikipedia style', '_'); // wikipedia_style
+echo \Slugifier::slugify('Wikipedia style', '_'); // wikipedia_style
 ```

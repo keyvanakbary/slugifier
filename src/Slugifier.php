@@ -92,20 +92,17 @@ class Slugifier
         '¹' => '1', '²' => '2', '³' => '3', '¶' => 'P'
     );
 
-    public function slugify($text, $separator = '-')
+    public static function slugify($text, $separator = '-')
     {
-        $text = $this->normalize($text);
-        $text = $this->replaceUnwantedChars($text, $separator);
-
-        return trim($text, $separator);
+        return trim(self::replaceUnwantedChars(self::normalize($text), $separator), $separator);
     }
 
-    private function normalize($text)
+    private static function normalize($text)
     {
         return strtolower(strtr($text, self::$charMap));
     }
 
-    private function replaceUnwantedChars($text, $separator)
+    private static function replaceUnwantedChars($text, $separator)
     {
         return preg_replace(self::UNWANTED_CHARS, $separator, $text);
     }

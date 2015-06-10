@@ -2,20 +2,13 @@
 
 class SlugifierTest extends \PHPUnit_Framework_TestCase
 {
-    private $slugifier;
-
-    protected function setUp()
-    {
-        $this->slugifier = new Slugifier();
-    }
-
     /**
      * @test
      * @dataProvider supportedStrings
      */
     public function shouldCreateSlug($text, $expectedSlug)
     {
-        $slug = $this->slugifier->slugify($text);
+        $slug = Slugifier::slugify($text);
 
         $this->assertEquals($expectedSlug, $slug);
     }
@@ -46,7 +39,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldCreateEmptySlug($text)
     {
-        $this->assertEmpty($this->slugifier->slugify($text));
+        $this->assertEmpty(Slugifier::slugify($text));
     }
 
     public function notSupportedStrings()
@@ -64,7 +57,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldCreateSlugWithCustomSeparator()
     {
-        $slug = $this->slugifier->slugify('Wikipedia style', '_');
+        $slug = Slugifier::slugify('Wikipedia style', '_');
 
         $this->assertEquals('wikipedia_style', $slug);
     }
