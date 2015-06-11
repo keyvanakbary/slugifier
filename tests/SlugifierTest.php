@@ -28,7 +28,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
             array('Это тест', 'eto-test'),
             array('Це тест', 'ce-test'),
             array('Đây là một thử nghiệm', 'day-la-mot-thu-nghiem'),
-            array('Αυτή είναι μια δοκιμή', 'ayte-einai-mia-dokime'),
+            array('Αυτή είναι μια δοκιμή', 'ayti-einai-mia-dokimi'),
             array('°¹²³@¶', '0123atp'),
         );
     }
