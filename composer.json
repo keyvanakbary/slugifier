@@ -1,7 +1,7 @@
 {
     "name": "keyvanakbary/slugifier",
-    "description": "Just a simple implementation for creating slugs",
-    "keywords": ["slugifier", "slug", "slugify", "url"],
+    "description": "A full-featured, simple and clean implementation for creating slugs",
+    "keywords": ["slugifier", "slug", "slugify", "url", "urlize"],
     "license": "MIT",
     "minimum-stability": "stable",
     "authors": [
