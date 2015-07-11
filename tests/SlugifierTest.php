@@ -61,4 +61,50 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('wikipedia_style', $slug);
     }
+
+    /**
+     * @test
+     * @dataProvider slugModifiers
+     */
+    public function shouldCreateSlugsWithModifiers($text, $modifier, $expectedSlug)
+    {
+        $slug = Slugifier::slugify($text, '-', $modifier);
+
+        $this->assertEquals($expectedSlug, $slug);
+    }
+
+    public function slugModifiers()
+    {
+        return array(
+            array('Bu bir örnektir', Slugifier::mod('tr'), 'bu-bir-ornektir'),
+            array('Supernatura estaĵo', Slugifier::mod('eo'), 'supernatura-estajxo'),
+            array('Interesting flavors', array('o' => 'ou'), 'interesting-flavours')
+        );
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     */
+    public function invalidModifierIsoShouldThrowException()
+    {
+        Slugifier::mod('invalid');
+    }
+
+    /**
+     * @test
+     * @dataProvider supportedIsoModifiers
+     */
+    public function shouldSupportIsoModifiers($iso)
+    {
+        $this->assertNotNull(Slugifier::mod($iso));
+    }
+
+    public function supportedIsoModifiers()
+    {
+        return array(
+            array('eo'),
+            array('tr')
+        );
+    }
 }

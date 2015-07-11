@@ -6,8 +6,6 @@ A full-featured, simple and clean implementation for creating [slugs](http://en.
 
 ## Installation
 
-To install this library, run the command below and you will get the latest version
-
 ``` bash
 composer require keyvanakbary/slugifier
 ```
@@ -15,9 +13,25 @@ composer require keyvanakbary/slugifier
 ## Usage
 
 ```php
-echo \Slugifier::slugify('JúST å fëw wørds'); // just-a-few-words
+\Slugifier::slugify('JúST å fëw wørds'); // just-a-few-words
 
-echo \Slugifier::slugify('Αυτή είναι μια δοκιμή'); // ayti-einai-mia-dokimi
+\Slugifier::slugify('Αυτή είναι μια δοκιμή'); // ayti-einai-mia-dokimi
 
-echo \Slugifier::slugify('Wikipedia style', '_'); // wikipedia_style
+\Slugifier::slugify('Wikipedia style', '_'); // wikipedia_style
+```
+
+### Modifiers
+
+Sometimes the default character map is not accurate enough. Slugifier supports custom *modifiers*
+
+```php
+\Slugifier::slugify('Pingüino', '-', array('ü' => 'u'))); // pinguino
+```
+
+Some language iso modifiers are supported
+
+```php
+\Slugifier::slugify('Estaĵo', '-', \Slugifier::mod('eo')); // estajxo
+
+\Slugifier::slugify('Örnektir', '-', \Slugifier::mod('tr')); // ornektir
 ```
