@@ -92,14 +92,31 @@ class Slugifier
         '¹' => '1', '²' => '2', '³' => '3', '¶' => 'P'
     );
 
-    public static function slugify($text, $separator = '-')
+    private static $modifiers = array(
+        'tr' => array('Ö' => 'O', 'Ü' => 'U', 'ö' => 'o', 'ü' => 'u'),
+        'eo' => array(
+            'ĉ' => 'cx', 'ĝ' => 'gx', 'ĥ' => 'hx', 'ĵ' => 'jx', 'ŝ' => 'sx', 'ŭ' => 'ux', 'Ĉ' => 'CX', 'Ĝ' => 'GX',
+            'Ĥ' => 'HX', 'Ĵ' => 'JX', 'Ŝ' => 'SX', 'Ŭ' => 'UX'
+        )
+    );
+
+    public static function mod($iso)
     {
-        return trim(self::replaceUnwantedChars(self::normalize($text), $separator), $separator);
+        if (!isset(self::$modifiers[$iso])) {
+            throw new \InvalidArgumentException(sprintf('Iso "%s" not supported', $iso));
+        }
+
+        return self::$modifiers[$iso];
     }
 
-    private static function normalize($text)
+    public static function slugify($text, $separator = '-', array $modifier = array())
     {
-        return strtolower(strtr($text, self::$charMap));
+        return trim(self::replaceUnwantedChars(self::normalize($text, $modifier), $separator), $separator);
+    }
+
+    private static function normalize($text, array $modifier)
+    {
+        return strtolower(strtr($text, $modifier + self::$charMap));
     }
 
     private static function replaceUnwantedChars($text, $separator)
