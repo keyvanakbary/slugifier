@@ -35,3 +35,7 @@ Some language iso modifiers are supported
 
 \Slugifier::slugify('Örnektir', '-', \Slugifier::mod('tr')); // ornektir
 ```
+
+## License
+
+Slugifier is licensed under [The MIT License (MIT)](LICENSE).
