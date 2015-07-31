@@ -1,9 +1,33 @@
 <?php
 
+/*
+ * This file is part of Slugifier.
+ *
+ * (c) Keyvan Akbary <kiwwito@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * This is the slugifier class.
+ *
+ * @author Keyvan Akbary <kiwwito@gmail.com>
+ */
 class Slugifier
 {
+    /**
+     * The unwanted characters reg exp.
+     *
+     * @var string
+     */
     const UNWANTED_CHARS = '/([^a-z0-9]|-)+/';
 
+    /**
+     * The character map.
+     *
+     * @var array
+     */
     private static $charMap = array(
         // Latin
         '°' => '0', 'æ' => 'ae', 'ǽ' => 'ae', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Å' => 'A', 'Ǻ' => 'A',
@@ -92,6 +116,11 @@ class Slugifier
         '¹' => '1', '²' => '2', '³' => '3', '¶' => 'P'
     );
 
+    /**
+     * The modifier array.
+     *
+     * @var array
+     */
     private static $modifiers = array(
         'tr' => array('Ö' => 'O', 'Ü' => 'U', 'ö' => 'o', 'ü' => 'u'),
         'eo' => array(
@@ -100,6 +129,13 @@ class Slugifier
         )
     );
 
+    /**
+     * Get a modifier.
+     *
+     * @param string $iso
+     *
+     * @return mixed
+     */
     public static function mod($iso)
     {
         if (!isset(self::$modifiers[$iso])) {
@@ -109,16 +145,41 @@ class Slugifier
         return self::$modifiers[$iso];
     }
 
+    /**
+     * Slugify a string.
+     *
+     * @param string $text
+     * @param string $separator
+     * @param array $modifier
+     *
+     * @return string
+     */
     public static function slugify($text, $separator = '-', array $modifier = array())
     {
         return trim(self::replaceUnwantedChars(self::normalize($text, $modifier), $separator), $separator);
     }
 
+    /**
+     * Normalize a string.
+     *
+     * @param string $text
+     * @param array $modifier
+     *
+     * @return string
+     */
     private static function normalize($text, array $modifier)
     {
         return strtolower(strtr($text, $modifier + self::$charMap));
     }
 
+    /**
+     * Replace unwanted characters.
+     *
+     * @param string $text
+     * @param string $separator
+     *
+     * @return string
+     */
     private static function replaceUnwantedChars($text, $separator)
     {
         return preg_replace(self::UNWANTED_CHARS, $separator, $text);
