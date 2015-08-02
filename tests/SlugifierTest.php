@@ -17,22 +17,22 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
 
     public function supportedStrings()
     {
-        return array(
-            array('Word', 'word'),
-            array('JúST å fëw wørds', 'just-a-few-words'),
-            array('J\'étudie le français', 'j-etudie-le-francais'),
-            array('An awesome slug', 'an-awesome-slug'),
-            array('  should trim  this   text ', 'should-trim-this-text'),
-            array('Práctica de acentuación', 'practica-de-acentuacion'),
-            array('Cumpleaños del muerciélago', 'cumpleanos-del-muercielago'),
-            array('هذا هو الاختبار', 'hth-ho-l-khtb-r'),
-            array('Блоґ їжачка', 'blog-jizhachka'),
-            array('Это тест', 'eto-test'),
-            array('Це тест', 'ce-test'),
-            array('Đây là một thử nghiệm', 'day-la-mot-thu-nghiem'),
-            array('Αυτή είναι μια δοκιμή', 'ayti-einai-mia-dokimi'),
-            array('°¹²³@¶', '0123atp'),
-        );
+        return [
+            ['Word', 'word'],
+            ['JúST å fëw wørds', 'just-a-few-words'],
+            ['J\'étudie le français', 'j-etudie-le-francais'],
+            ['An awesome slug', 'an-awesome-slug'],
+            ['  should trim  this   text ', 'should-trim-this-text'],
+            ['Práctica de acentuación', 'practica-de-acentuacion'],
+            ['Cumpleaños del muerciélago', 'cumpleanos-del-muercielago'],
+            ['هذا هو الاختبار', 'hth-ho-l-khtb-r'],
+            ['Блоґ їжачка', 'blog-jizhachka'],
+            ['Это тест', 'eto-test'],
+            ['Це тест', 'ce-test'],
+            ['Đây là một thử nghiệm', 'day-la-mot-thu-nghiem'],
+            ['Αυτή είναι μια δοκιμή', 'ayti-einai-mia-dokimi'],
+            ['°¹²³@¶', '0123atp']
+        ];
     }
 
     /**
@@ -46,12 +46,12 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
 
     public function notSupportedStrings()
     {
-        return array(
-            array(' ..`-. '),
-            array('테스트'),
-            array('- --'),
-            array('這是一個測試')
-        );
+        return [
+            [' ..`-. '],
+            ['테스트'],
+            ['- --'],
+            ['這是一個測試']
+        ];
     }
 
     /**
@@ -77,20 +77,11 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
 
     public function slugModifiers()
     {
-        return array(
-            array('Bu bir örnektir', mod('tr'), 'bu-bir-ornektir'),
-            array('Supernatura estaĵo', mod('eo'), 'supernatura-estajxo'),
-            array('Interesting flavors', array('o' => 'ou'), 'interesting-flavours')
-        );
-    }
-
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function invalidModifierIsoShouldThrowException()
-    {
-        mod('invalid');
+        return [
+            ['Bu bir örnektir', MOD['tr'], 'bu-bir-ornektir'],
+            ['Supernatura estaĵo', MOD['eo'], 'supernatura-estajxo'],
+            ['Interesting flavors', ['o' => 'ou'], 'interesting-flavours']
+        ];
     }
 
     /**
@@ -99,14 +90,14 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSupportIsoModifiers($iso)
     {
-        $this->assertNotNull(mod($iso));
+        $this->assertNotNull(MOD[$iso]);
     }
 
     public function supportedIsoModifiers()
     {
-        return array(
-            array('eo'),
-            array('tr')
-        );
+        return [
+            ['eo'],
+            ['tr']
+        ];
     }
 }
