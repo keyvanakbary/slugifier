@@ -27,7 +27,7 @@ s\slugify('Wikipedia style', '_'); // wikipedia_style
 Sometimes the default character map is not accurate enough. Slugifier supports custom *modifiers*
 
 ```php
-s\slugify('Pingüino', '-', ['ü' => 'u'])); // pinguino
+s\slugify('Pingüino', '-', ['ü' => 'u']); // pinguino
 ```
 
 Some [language iso code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) modifiers are supported
