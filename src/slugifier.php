@@ -1,10 +1,10 @@
 <?php
 
-class Slugifier
-{
-    const UNWANTED_CHARS = '/([^a-z0-9]|-)+/';
+namespace slugifier;
 
-    private static $charMap = array(
+class char
+{
+    public static $map = array(
         // Latin
         '°' => '0', 'æ' => 'ae', 'ǽ' => 'ae', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Å' => 'A', 'Ǻ' => 'A',
         'Ă' => 'A', 'Ǎ' => 'A', 'Æ' => 'AE', 'Ǽ' => 'AE', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'å' => 'a',
@@ -92,35 +92,28 @@ class Slugifier
         '¹' => '1', '²' => '2', '³' => '3', '¶' => 'P'
     );
 
-    private static $modifiers = array(
+    public static $modifiers = array(
         'tr' => array('Ö' => 'O', 'Ü' => 'U', 'ö' => 'o', 'ü' => 'u'),
         'eo' => array(
             'ĉ' => 'cx', 'ĝ' => 'gx', 'ĥ' => 'hx', 'ĵ' => 'jx', 'ŝ' => 'sx', 'ŭ' => 'ux', 'Ĉ' => 'CX', 'Ĝ' => 'GX',
             'Ĥ' => 'HX', 'Ĵ' => 'JX', 'Ŝ' => 'SX', 'Ŭ' => 'UX'
         )
     );
+}
 
-    public static function mod($iso)
-    {
-        if (!isset(self::$modifiers[$iso])) {
-            throw new \InvalidArgumentException(sprintf('Iso "%s" not supported', $iso));
-        }
-
-        return self::$modifiers[$iso];
+function mod($iso)
+{
+    if (!isset(char::$modifiers[$iso])) {
+        throw new \InvalidArgumentException(sprintf('Iso "%s" not supported', $iso));
     }
 
-    public static function slugify($text, $separator = '-', array $modifier = array())
-    {
-        return trim(self::replaceUnwantedChars(self::normalize($text, $modifier), $separator), $separator);
-    }
+    return char::$modifiers[$iso];
+}
 
-    private static function normalize($text, array $modifier)
-    {
-        return strtolower(strtr($text, $modifier + self::$charMap));
-    }
+function slugify($text, $separator = '-', array $modifier = array())
+{
+    $normalized = strtolower(strtr($text, $modifier + char::$map));
+    $cleaned = preg_replace($unwantedChars = '/([^a-z0-9]|-)+/', $separator, $normalized);
 
-    private static function replaceUnwantedChars($text, $separator)
-    {
-        return preg_replace(self::UNWANTED_CHARS, $separator, $text);
-    }
+    return trim($cleaned, $separator);
 }
