@@ -1,5 +1,7 @@
 <?php
 
+namespace slugifier;
+
 class SlugifierTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -8,7 +10,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldCreateSlug($text, $expectedSlug)
     {
-        $slug = Slugifier::slugify($text);
+        $slug = slugify($text);
 
         $this->assertEquals($expectedSlug, $slug);
     }
@@ -39,7 +41,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldCreateEmptySlug($text)
     {
-        $this->assertEmpty(Slugifier::slugify($text));
+        $this->assertEmpty(slugify($text));
     }
 
     public function notSupportedStrings()
@@ -57,7 +59,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldCreateSlugWithCustomSeparator()
     {
-        $slug = Slugifier::slugify('Wikipedia style', '_');
+        $slug = slugify('Wikipedia style', '_');
 
         $this->assertEquals('wikipedia_style', $slug);
     }
@@ -68,7 +70,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldCreateSlugsWithModifiers($text, $modifier, $expectedSlug)
     {
-        $slug = Slugifier::slugify($text, '-', $modifier);
+        $slug = slugify($text, '-', $modifier);
 
         $this->assertEquals($expectedSlug, $slug);
     }
@@ -76,8 +78,8 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
     public function slugModifiers()
     {
         return array(
-            array('Bu bir örnektir', Slugifier::mod('tr'), 'bu-bir-ornektir'),
-            array('Supernatura estaĵo', Slugifier::mod('eo'), 'supernatura-estajxo'),
+            array('Bu bir örnektir', mod('tr'), 'bu-bir-ornektir'),
+            array('Supernatura estaĵo', mod('eo'), 'supernatura-estajxo'),
             array('Interesting flavors', array('o' => 'ou'), 'interesting-flavours')
         );
     }
@@ -88,7 +90,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function invalidModifierIsoShouldThrowException()
     {
-        Slugifier::mod('invalid');
+        mod('invalid');
     }
 
     /**
@@ -97,7 +99,7 @@ class SlugifierTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSupportIsoModifiers($iso)
     {
-        $this->assertNotNull(Slugifier::mod($iso));
+        $this->assertNotNull(mod($iso));
     }
 
     public function supportedIsoModifiers()
