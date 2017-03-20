@@ -37,3 +37,7 @@ s\slugify('Estaĵo', '-', s\MOD['eo']); // estajxo
 
 s\slugify('Örnektir', '-', s\MOD['tr']); // ornektir
 ```
+
+## License
+
+Slugifier is licensed under [The MIT License (MIT)](LICENSE).
